@@ -1,9 +1,14 @@
-package workbook.app2.domain;
+package sandbox.app1.domain;
+
+import org.codehaus.jackson.map.ObjectMapper;
+import sandbox.jms.AbstractProducer;
+
+import java.io.IOException;
 
 /**
  * Created by cbevard1 on 4/27/16.
  */
-public class Processor2POJO {
+public class App1POJO implements AbstractProducer.JmsMessage {
     private int id;
     private String name;
 
@@ -25,9 +30,14 @@ public class Processor2POJO {
 
     @Override
     public String toString() {
-        return "Processor2POJO{" +
+        return "App1POJO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public String toJson() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(this);
     }
 }
